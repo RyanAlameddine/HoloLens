@@ -27,6 +27,10 @@ public class VoiceController : MonoBehaviour {
         {
             SceneManager.LoadScene(0, LoadSceneMode.Single);
         });
+        keywords.Add("teleport", () =>
+        {
+            GameObject.FindGameObjectWithTag("Cube").transform.position = Camera.main.transform.position;
+        });
 
         recognizer = new KeywordRecognizer(keywords.Keys.ToArray());
 

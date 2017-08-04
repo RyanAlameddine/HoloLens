@@ -6,6 +6,8 @@ using UnityEngine;
 public class WorldCursor : MonoBehaviour {
     MeshRenderer mr;
     RaycastHit hitInfo;
+    [SerializeField]
+    Transform holdSpot;
     public RaycastHit HitInfo
     {
         get { return hitInfo; }
@@ -22,13 +24,12 @@ public class WorldCursor : MonoBehaviour {
         Vector3 gazeDirection = Camera.main.transform.forward;
         if(Physics.Raycast(headPosition, gazeDirection, out hitInfo))
         {
-            mr.enabled = true;
             transform.position = hitInfo.point;
             transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
         }
         else
         {
-            mr.enabled = false;
+            transform.position = holdSpot.position;
         }
 	}
 }

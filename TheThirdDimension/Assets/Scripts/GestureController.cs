@@ -14,6 +14,8 @@ public class GestureController : MonoBehaviour {
     public GameObject portal1;
     public GameObject portal2;
     bool portal1Selected = true;
+    [SerializeField]
+    WorldCursor cursor;
 
 	void Start () {
         recognizer = new GestureRecognizer();
@@ -50,12 +52,13 @@ public class GestureController : MonoBehaviour {
                 {
                     portal1.transform.position = hitInfo.point;
                     portal1.transform.rotation = Quaternion.FromToRotation(Vector3.forward, hitInfo.normal);
-                    portal1.transform.position += hitInfo.normal * .15f;
+                    portal1.transform.position += hitInfo.normal * .1f;
                 }
                 else
                 {
                     portal2.transform.position = hitInfo.point;
                     portal2.transform.rotation = Quaternion.FromToRotation(Vector3.forward, hitInfo.normal);
+                    portal2.transform.position += hitInfo.normal * .1f;
                 }
                 portal1Selected = !portal1Selected;
             }
