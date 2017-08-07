@@ -38,6 +38,9 @@ public class GestureController : MonoBehaviour {
         {
             selectedObject.SendMessage("OnSelect");
             cubeSelected = selectedObject;
+        }else if(selectedObject.tag == "Button")
+        {
+            selectedObject.GetComponent<Button>().Select();
         }
         else
         {

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - HoldSpot
   - Cube
+  - Button
   layers:
   - Default
   - TransparentFX
