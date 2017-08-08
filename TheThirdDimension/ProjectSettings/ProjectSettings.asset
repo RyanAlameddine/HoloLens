@@ -516,7 +516,7 @@ PlayerSettings:
   metroCertificatePassword: 
   metroCertificateSubject: DefaultCompany
   metroCertificateIssuer: DefaultCompany
-  metroCertificateNotAfter: 800b81fb3929d401
+  metroCertificateNotAfter: 00ffc351772fd401
   metroApplicationDescription: TheThirdDimension
   wsaImages: {}
   metroTileShortName: 
