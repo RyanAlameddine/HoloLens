@@ -25,7 +25,7 @@ public class PipeGenerator : MonoBehaviour {
 	void Update () {
         foreach (GameObject obj in pipes)
         {
-            obj.transform.localPosition = obj.transform.localPosition - new Vector3(1 * Time.deltaTime, 0, 0);
+            obj.transform.localPosition = obj.transform.localPosition - new Vector3(1.5f * Time.deltaTime, 0, 0);
             if(obj.transform.localPosition.x <= -5)
             {
                 obj.transform.localPosition = new Vector3(5, Random.Range(-.5f, .5f), 0);

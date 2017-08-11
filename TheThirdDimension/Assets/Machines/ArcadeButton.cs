@@ -10,6 +10,8 @@ public class ArcadeButton : MonoBehaviour, ISelectable
     bool hovering = false;
     [SerializeField]
     int scene;
+    [SerializeField]
+    GameObject activateObject;
 
     BoxCollider collider;
 
@@ -39,6 +41,19 @@ public class ArcadeButton : MonoBehaviour, ISelectable
 
     public void Select()
     {
-        SceneManager.LoadScene(scene);
+        if (scene != 0)
+        {
+            Arcade arcade = GetComponentInParent<Arcade>();
+            int tokens = PlayerPrefs.GetInt(arcade.tokenKey);
+            if (tokens > 0)
+            {
+                PlayerPrefs.SetInt(arcade.tokenKey, tokens - 1);
+                SceneManager.LoadScene(scene);
+            }
+        }
+        if (activateObject)
+        {
+            activateObject.GetComponent<ISelectable>().Select();
+        }
     }
 }

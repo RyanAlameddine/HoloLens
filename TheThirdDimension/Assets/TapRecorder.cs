@@ -1,17 +1,42 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.VR.WSA.Input;
+using UnityEngine.Windows.Speech;
 
 public class TapRecorder : MonoBehaviour {
 
     GestureRecognizer recognizer;
+    KeywordRecognizer speech;
 
-	void Start () {
+    Dictionary<string, System.Action> keywords = new Dictionary<string, System.Action>();
+
+    void Start () {
         recognizer = new GestureRecognizer();
         recognizer.TappedEvent += TapEvent;
         recognizer.StartCapturingGestures();
-	}
+
+
+        keywords.Add("menu", () =>
+        {
+            SceneManager.LoadScene(0);
+        });
+        speech = new KeywordRecognizer(keywords.Keys.ToArray());
+        speech.OnPhraseRecognized += PhraseRecognized;
+        speech.Start();
+    }
+
+    private void PhraseRecognized(PhraseRecognizedEventArgs args)
+    {
+        System.Action keywordAction;
+        if (keywords.TryGetValue(args.text, out keywordAction))
+        {
+            keywordAction?.Invoke();
+        }
+    }
 
     private void TapEvent(InteractionSourceKind source, int tapCount, Ray headRay)
     {
@@ -48,5 +73,6 @@ public class TapRecorder : MonoBehaviour {
     private void OnDestroy()
     {
         recognizer.StopCapturingGestures();
+        speech.Stop();
     }
 }

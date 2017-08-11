@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
     public void Tap()
     {
         rigidBody.velocity = Vector3.zero;
-        rigidBody.AddRelativeForce(new Vector3(0, 2, 0), ForceMode.VelocityChange);
+        rigidBody.AddRelativeForce(new Vector3(0, 1.6f, 0), ForceMode.VelocityChange);
         audioSource.Play();
     }
 

@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
     private void Reset()
     {
         started = false;
+        player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         player.gameObject.SetActive(false);
         player.transform.localPosition = new Vector3(0, 0, 0);
         generator.enabled = false;
@@ -79,6 +80,11 @@ public class GameManager : MonoBehaviour
 
     public void End()
     {
+        if (PlayerPrefs.GetInt("Flappy") < score)
+        {
+            PlayerPrefs.SetInt("Flappy", score);
+            PlayerPrefs.Save();
+        }
         Reset();
     }
 
